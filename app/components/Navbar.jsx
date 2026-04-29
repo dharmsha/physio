@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, Calendar, ArrowRight } from "lucide-react";
+import Image from "next/image"; // Image component import kiya
+import { Menu, X, Phone, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -34,17 +35,24 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         
-        {/* LOGO: Solid & Bold */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center group-hover:bg-slate-900 transition-colors duration-300">
-            <span className="text-white font-bold text-lg italic">P</span>
+        {/* LOGO SECTION */}
+        <Link href="/" className="flex items-center gap-3 group">
+          {/* Logo Image from Public Folder */}
+          <div className="relative w-10 h-10 overflow-hidden rounded-lg">
+            <Image 
+              src="/phys.png" // 🔁 Apne logo file ka sahi naam check kar lena (logo.png, logo.jpg, etc.)
+              alt="PhysioCare Logo"
+              fill
+              className="object-contain group-hover:scale-110 transition-transform duration-300"
+            />
           </div>
-          <span className="text-2xl font-black tracking-tight text-slate-900">
+          
+          <span className="text-2xl font-black tracking-tight text-slate-900 hidden sm:block">
             Physio<span className="text-blue-600">Care</span>
           </span>
         </Link>
 
-        {/* DESKTOP MENU: Minimalist */}
+        {/* DESKTOP MENU */}
         <div className="hidden md:flex space-x-10 items-center">
           {navLinks.map((link) => (
             <Link 
@@ -56,7 +64,6 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* SOLID CTA BUTTON */}
           <Link
             href="/appointment"
             className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-slate-900 shadow-lg shadow-blue-100 transition-all transform active:scale-95"
@@ -80,7 +87,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MOBILE OVERLAY: Solid & Clean */}
+      {/* MOBILE OVERLAY */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
